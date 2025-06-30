@@ -1,20 +1,20 @@
+// Download section removed from project. If you need to restore it, use version control.
+// This file is deprecated and should be removed.
+
 import { Element } from "react-scroll";
-import { links, logos } from "../constants/index.jsx";
+import { links, logos } from "../constants/data.js";
 import { Marker } from "../components/Marker.jsx";
 
 const Download = () => {
   return (
-    <section>
-      <Element
-        name="download"
-        className="g7 relative pb-32 pt-24 max-lg:pb-24 max-md:py-16"
-      >
+    <section className="g7 relative pb-32 pt-24 max-lg:pb-24 max-md:py-16 bg-white">
+      <Element name="download">
         <div className="container">
           <div className="flex items-center">
             <div className="relative mr-6 flex-540 max-xl:flex-280 max-lg:flex256 max-md:flex-100">
               <div className="mb-10">
                 <img
-                  src="/images/xora.svg"
+                  src="/images/cedur.svg"
                   width={160}
                   height={55}
                   alt="xora"
@@ -23,7 +23,7 @@ const Download = () => {
 
               <p className="body-1 mb-10 max-w-md">
                 Try it now for free on iOS, Android, PC, Web - whatever your
-                flavor, we've got you covered.
+                flavor, we&#39;ve got you covered.
               </p>
 
               <ul className="flex flex-wrap items-center gap-6">

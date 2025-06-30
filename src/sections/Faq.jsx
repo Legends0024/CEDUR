@@ -1,48 +1,35 @@
-import { Element } from "react-scroll";
-import { faq } from "../constants/index.jsx";
-import FaqItem from "../components/FaqItem.jsx";
+
+import { useState } from "react";
+import { faq } from "../constants/data.js";
 
 const Faq = () => {
-  const halfLength = Math.floor(faq.length / 2);
-
+  const [openIndex, setOpenIndex] = useState(null);
   return (
-    <section>
-      <Element name="faq" className="relative">
-        <div className="container relative z-2 py-28">
-          <div>
-            <h3 className="h3 max-md:h5 max-w-640 max-lg:max-w-md mb-7 text-p4">
-              Curiosity didn't kill the cat, it gave it answers.
-            </h3>
-            <p className="body-1 max-lg:max-w-sm">
-              You've got questions, we've got answers.
-            </p>
-          </div>
-
-          <div className="faq-line_after w-0.5 h-full absolute left-[calc(50%-1px)] top-0 -z-1 bg-s2" />
-        </div>
-
-        <div className="faq-glow_before relative z-2 border-2 border-s2 bg-s1">
-          <div className="container flex gap-10 max-lg:block">
-            <div className="rounded-half absolute -top-10 left-[calc(50%-40px)] z-4 flex size-20 items-center justify-center border-2 border-s2 bg-s1">
-              <img src="/images/faq-logo.svg" alt="logo" className="size-1/2" />
-            </div>
-
-            <div className="relative flex-1 pt-24">
-              {faq.slice(0, halfLength).map((item, index) => (
-                <FaqItem key={item.id} item={item} index={index} />
-              ))}
-            </div>
-
-            <div className="relative flex-1 lg:pt-24">
-              {faq.slice(halfLength).map((item, index) => (
-                <FaqItem key={item.id} item={item} index={halfLength + index} />
-              ))}
-            </div>
-          </div>
-
-          <div className="faq-lin_after absolute left-[calc(50%-1px)] top-0 -z-1 h-full w-0.5 bg-s2 max-lg:hidden" />
-        </div>
-      </Element>
+    <section className="bg-[#ede7f6] min-h-screen py-24">
+      <div className="max-w-3xl mx-auto px-6">
+        <h2 className="text-4xl font-black mb-4 text-gray-900 text-center">FAQ</h2>
+        <p className="text-lg md:text-xl text-gray-700 mb-8 text-center">
+          You've got questions, we've got answers.
+        </p>
+        <ul className="space-y-6">
+          {faq.map((item, idx) => (
+            <li key={item.id} className="bg-white rounded-2xl shadow-lg p-6">
+              <div className="flex items-center justify-between">
+                <span className="font-semibold text-gray-900 text-lg">{item.question}</span>
+                <button
+                  className="ml-4 px-4 py-2 bg-purple-700 text-white rounded-md font-bold hover:bg-purple-900 transition-colors"
+                  onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                >
+                  {openIndex === idx ? "Hide Answer" : "Show Answer"}
+                </button>
+              </div>
+              {openIndex === idx && (
+                <p className="mt-4 text-gray-700 border-t pt-4">{item.answer}</p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 };

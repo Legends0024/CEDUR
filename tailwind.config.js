@@ -18,21 +18,32 @@ export default {
           DEFAULT: "#000000",
           100: "#05091D",
         },
+
+        // 🌿 Gusto-style colors
+        lightbg: "#f9fafb",     // card/background
+        primary: "#166534",     // CTA/accents (teal green)
+        darktext: "#1F2937",     // base text
+        muted: "#6B7280",       // for subtitles/hints
+        bordergray: "#e5e7eb"   // for subtle borders
       },
+
       boxShadow: {
         100: "0px 4px 4px rgba(0, 0, 0, 0.25), 0px 16px 24px rgba(0, 0, 0, 0.25), inset 0px 3px 6px #1959AD",
         200: "0px 4px 4px rgba(0, 0, 0, 0.25), 0px 16px 24px rgba(0, 0, 0, 0.25), inset 0px 4px 10px #3391FF",
         300: "0px 4px 4px rgba(0, 0, 0, 0.25), 0px 16px 24px rgba(0, 0, 0, 0.25), inset 0px 3px 6px #1959AD",
-        400: "inset 0px 2px 4px 0 rgba(255, 255, 255, 0.05)",
+        400: "inset 0px 2px 4px 0 rgba(0, 0, 0, 0.25)",
         500: "0px 16px 24px rgba(0, 0, 0, 0.25), 0px -14px 48px rgba(40, 51, 111, 0.7)",
       },
+
       fontFamily: {
         inter: ["Inter", "sans-serif"],
         poppins: ["Poppins", "sans-serif"],
       },
+
       transitionProperty: {
         borderColor: "border-color",
       },
+
       spacing: {
         "1/5": "20%",
         "2/5": "40%",
@@ -57,14 +68,17 @@ export default {
         960: "960px",
         1230: "1230px",
       },
+
       zIndex: {
         1: "1",
         2: "2",
         4: "4",
       },
+
       lineHeight: {
         12: "48px",
       },
+
       borderRadius: {
         14: "14px",
         20: "20px",
@@ -72,6 +86,7 @@ export default {
         half: "50%",
         "7xl": "40px",
       },
+
       flex: {
         50: "0 0 50%",
         320: "1px 0 320px",

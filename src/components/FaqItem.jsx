@@ -2,10 +2,10 @@ import clsx from "clsx";
 import { useState } from "react";
 import { SlideDown } from "react-slidedown";
 import "react-slidedown/lib/slidedown.css";
+import PropTypes from "prop-types";
 
 const FaqItem = ({ item, index }) => {
   const [activeId, setActiveId] = useState(null);
-
   const active = activeId === item.id;
 
   return (
@@ -23,7 +23,7 @@ const FaqItem = ({ item, index }) => {
           </div>
           <div
             className={clsx(
-              "h6 text-p4 transition-colors duration-500 max-md:flex max-md:min-h-20 max-md:items-center",
+              "h6 text-black transition-colors duration-500 max-md:flex max-md:min-h-20 max-md:items-center",
               active && "max-lg:text-p1",
             )}
           >
@@ -43,7 +43,7 @@ const FaqItem = ({ item, index }) => {
 
       <SlideDown>
         {activeId === item.id && (
-          <div className="body-3 px-7 py-3.5">{item.answer}</div>
+          <div className="body-3 px-7 py-3.5 text-black">{item.answer}</div>
         )}
       </SlideDown>
 
@@ -59,4 +59,14 @@ const FaqItem = ({ item, index }) => {
     </div>
   );
 };
+
+FaqItem.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    question: PropTypes.string.isRequired,
+    answer: PropTypes.string.isRequired,
+  }).isRequired,
+  index: PropTypes.number.isRequired,
+};
+
 export default FaqItem;
