@@ -1,61 +1,59 @@
-import { Element } from "react-scroll";
-import { features, details } from "../constants/data.js";
-import Button from "../components/Button.jsx";
+
+const featuresData = [
+  {
+    title: "Seamless 2-Step On-Boarding, Optimised for Speed & Simplicity",
+    text: "With Cedur, it only takes a few minutes to on-board your employees. No lengthy forms with irrelevant details, just what you need to get the job done. Process so simple even a child can do it. Specify how much your employees earn just once, it's a set and forget system.",
+    image: "/images/detail-1.png",
+  },
+  {
+    title: "Be thorough with Attendance that Never Leaves Room for Doubt",
+    text: "When you mark attendance with Cedur, you can rest assured that no employee falls between cracks. You can mark manually for every employee every day or make bulk attendance uploads with our import tool.",
+    image: "/images/detail-2.png",
+  },
+  {
+    title: "Leave Management for Robust HR Policy",
+    text: "With Leave Management your organization can have a robust HR policy that makes both your and your employee's lives easier.",
+    image: "/images/detail-3.png",
+  },
+  {
+    title: "Run Automatic Payroll with Just 1 Click",
+    text: "Our Payroll feature helps you know how much you have to pay your employees and the taxman, making sure you have no run-ins with the good people of the Tax Department. Cedur automatically calculates your payroll leaving you with usable action data you can rely on.",
+    image: "/images/detail-4.png",
+  },
+  {
+    title: "Generated Payslips for When Documents Matter",
+    text: "Cedur generates monthly Payslips and action data that help both you and your employees keep record and proof of prior transactions, so you don't have to scramble for excel sheets when the tax season arrives.",
+    image: "/images/detail-5.png",
+  },
+];
 
 const Features = () => {
-  // Only remove the feature with title "Run payroll in minutes with smart technology."
-  const filteredFeatures = features.filter(
-    (f) => f.title !== "Run payroll in minutes with smart technology."
-  );
-
   return (
-    <section className="bg-[#e6dbf7]">
-      <Element name="features">
-        <div className="container bg-[#e6dbf7]">
-          <div className="relative flex md:flex-wrap flex-nowrap md:overflow-hidden max-md:flex-col md:g7 max-md:gap-3">
-            {filteredFeatures.map(
-              ({ id, icon, caption, title, text, button }) => (
-                <div
-                  key={id}
-                  className="relative z-2 md:px-10 px-5 md:pb-10 pb-5 flex-50 max-md:g7 max-md:flex-320"
-                >
-                  <div className="w-full flex justify-start items-start">
-                    <div className="-ml-3 mb-12 flex items-center justify-center flex-col">
-                      {/* Restore any content here if needed, but keep image removed as requested */}
-                    </div>
-                  </div>
-
-                  <p className="caption mb-5 max-md:mb-6 text-black">{caption}</p>
-                  <h2 className="max-w-400 mb-7 h3 text-white max-md:mb-6 max-md:h5">
-                    {title}
-                  </h2>
-                  <p className="mb-11 body-1 max-md:mb-8 max-md:body-3 text-white">
-                    {text}
-                  </p>
-                  <Button icon={button.icon}>{button.title}</Button>
-                </div>
-              )
-            )}
-
-            <ul className="relative flex justify-around flex-grow px-[5%] max-md:hidden">
-              {details.map(({ id, icon, title }) => (
-                <li key={id} className="relative pt-16 px-4 pb-14">
-                  <div className="flex items-center justify-center mx-auto mb-3 transition-all duration-500 shadow-500 size-20">
-                    <img
-                      src={icon}
-                      alt={title}
-                      className="size-17/20 object-contain z-20"
-                    />
-                  </div>
-                  <h3 className="relative z-2 max-w-36 mx-auto my-0 base-small text-center uppercase text-white">
-                    {title}
-                  </h3>
-                </li>
-              ))}
-            </ul>
-          </div>
+    <section className="bg-[#ede7f6] py-16">
+      <div className="container mx-auto px-4 md:px-8">
+        <h2 className="text-4xl md:text-5xl font-bold text-center text-black mb-16">Features That Make Cedur Stand Out</h2>
+        <div className="space-y-20">
+          {featuresData.map((feature, idx) => (
+            <div
+              key={feature.title}
+              className={`flex flex-col-reverse md:flex-row items-center md:justify-between gap-10 md:gap-20 ${idx % 2 === 1 ? 'md:flex-row-reverse' : ''}`}
+            >
+              <div className="md:w-1/2 w-full">
+                <img
+                  src={feature.image}
+                  alt={feature.title}
+                  className="w-full max-w-md mx-auto rounded-2xl shadow-xl border border-[#e6dbf7] bg-white"
+                  style={{ boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.10)' }}
+                />
+              </div>
+              <div className="md:w-1/2 w-full text-center md:text-left">
+                <h3 className="text-2xl md:text-3xl font-bold text-[#6c47c7] mb-4">{feature.title}</h3>
+                <p className="text-lg text-gray-800 mb-4">{feature.text}</p>
+              </div>
+            </div>
+          ))}
         </div>
-      </Element>
+      </div>
     </section>
   );
 };

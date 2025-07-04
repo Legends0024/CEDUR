@@ -106,7 +106,7 @@ export const plans = [
       "Access & User Management",
     ],
     icon: "/images/circle.svg",
-    logo: "/images/plan-1.png",
+    
   },
   {
     id: "1",
@@ -122,8 +122,6 @@ export const plans = [
       "Employee Onboardingt",
       "Access & User Management",
     ],
-    icon: "/images/triangle.svg",
-    logo: "/images/plan-2.png",
   },
   {
     id: "2",
@@ -139,8 +137,6 @@ export const plans = [
       "Employee Onboardingt",
       "Access & User Management",
     ],
-    icon: "/images/hexagon.svg",
-    logo: "/images/plan-3.png",
   },
 ];
 
@@ -169,16 +165,10 @@ export const testimonials = [
     comment:
       "Adopting Cedur was a breeze. The onboarding process is seamless, and the real-time leave tracking has eliminated back-and-forth with HR. It's incredibly efficient.",
   },
+  
+    
   {
     id: "3",
-    name: "Rakesh Jain",
-    role: "Finance Head, BrightCore",
-    avatarUrl: "/images/testimonials/RAKESH.jpeg",
-    comment:
-      "The analytics feature in Cedur gives us visibility we never had before. It's helped us improve retention and workforce planning drastically.",
-  },
-  {
-    id: "4",
     name: "Anjali Sinha",
     role: "Operations Lead, EduVibe",
     avatarUrl: "/images/testimonials/becky-snider.png",
@@ -186,7 +176,7 @@ export const testimonials = [
       "We switched to Cedur last month, and I already feel like I’ve reclaimed hours of manual work. It’s intuitive, powerful, and fast.",
   },
   {
-    id: "5",
+    id: "4",
     name: "Nikhil Rao",
     role: "Recruitment Specialist, Codemyte",
     avatarUrl: "/images/testimonials/jim-bradley.png",

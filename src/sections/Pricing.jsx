@@ -3,7 +3,7 @@ import { useState } from "react";
 import clsx from "clsx";
 import CountUp from "react-countup";
 import { plans } from "../constants/data.js";
-import Button from "../components/Button.jsx";
+// import Button from "../components/Button.jsx";
 
 const Pricing = () => {
   const [monthly, setMonthly] = useState(false);
@@ -19,13 +19,19 @@ const Pricing = () => {
 
             <div className="relative z-4 mx-auto flex w-[375px] rounded-3xl border-[3px] border-[#b39ddb]/25 bg-[#e6dbf7] p-2 backdrop-blur-[6px] max-md:w-[310px]">
               <button
-                className={clsx("pricing-head_btn text-black", monthly && "text-p4")}
+                className={clsx(
+                  "pricing-head_btn font-bold",
+                  monthly ? "text-black" : "text-black/60"
+                )}
                 onClick={() => setMonthly(true)}
               >
                 Monthly
               </button>
               <button
-                className={clsx("pricing-head_btn text-black", !monthly && "text-p4")}
+                className={clsx(
+                  "pricing-head_btn font-bold",
+                  !monthly ? "text-black" : "text-black/60"
+                )}
                 onClick={() => setMonthly(false)}
               >
                 Annual
@@ -63,34 +69,10 @@ const Pricing = () => {
 
                 <div
                   className={clsx(
-                    "absolute left-0 right-0 z-2 flex items-center justify-center",
-                    index === 1 ? "-top-6" : "-top-6 xl:-top-11",
-                  )}
-                >
-                  <img
-                    src={plan.logo}
-                    alt={plan.title}
-                    className={clsx(
-                      "object-contain drop-shadow-2xl",
-                      index === 1 ? "size-[120px]" : "size-[88px]",
-                    )}
-                  />
-                </div>
-
-                <div
-                  className={clsx(
                     "relative flex flex-col items-center",
                     index === 1 ? "pt-24" : "pt-12",
                   )}
                 >
-                  <div
-                    className={clsx(
-                      "small-2 rounded-20 relative z-2 mx-auto mb-6 border-2 px-4 py-1.5 uppercase",
-                      index === 1 ? "border-p3 text-p3" : "border-p1 text-p1",
-                    )}
-                  >
-                    {plan.title}
-                  </div>
 
                   <div className="relative z-2 flex items-center justify-center">
                     <div
@@ -139,9 +121,7 @@ const Pricing = () => {
                   ))}
                 </ul>
 
-                <div className="mt-10 flex w-full justify-center">
-                  <Button icon={plan.icon}>Get Started</Button>
-                </div>
+                
 
                 {index === 1 && (
                   <p className="small-compact mt-9 text-center text-p3 before:mx-2.5 before:content-['-'] after:mx-2.5 after:content-['-']">

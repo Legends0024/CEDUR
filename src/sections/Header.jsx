@@ -1,11 +1,12 @@
-import { Link as LinkScroll } from "react-scroll";
+// import { Link as LinkScroll } from "react-scroll";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
-import PropTypes from "prop-types";
+
 
 const Header = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,22 +20,8 @@ const Header = () => {
     };
   }, []);
 
-  const NavLink = ({ title }) => (
-    <LinkScroll
-      onClick={() => setIsOpen(false)}
-      to={title}
-      offset={-100}
-      spy
-      smooth
-      activeClass="nav-active"
-      className="text-sm font-semibold text-purple-600 hover:text-purple-800 transition-colors duration-200 uppercase px-2 py-1"
-    >
-      {title.charAt(0).toUpperCase() + title.slice(1)}
-    </LinkScroll>
-  );
-  NavLink.propTypes = {
-    title: PropTypes.string.isRequired,
-  };
+  // Removed unused NavLink component
+
 
   return (
     <header
@@ -43,36 +30,46 @@ const Header = () => {
         hasScrolled && "py-2 bg-white/90 backdrop-blur-[8px]",
       )}
     >
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between rounded-full bg-white shadow-lg px-8 py-3 mt-4">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between rounded-full bg-white shadow-lg px-4 py-2 mt-2 md:px-8 md:py-3 md:mt-4">
           {/* Logo */}
-          <a href="#hero" className="flex items-center gap-2 min-w-[140px]">
-            <img src="/images/cedur.png" alt="logo" width={40} height={40} className="h-10 w-10 object-contain" />
-            <span className="font-black text-2xl text-gray-900 tracking-tight">Cedur</span>
+          <a href="/" className="flex items-center gap-2 min-w-[100px]">
+            <img src="/images/cedur.png" alt="logo" className="h-10 w-auto object-contain" />
           </a>
 
           {/* Main nav */}
-          <nav className="flex items-center gap-7 text-base font-semibold text-gray-800">
-            <a href="features.html" className="hover:text-purple-700 transition-colors">Features</a>
-            <LinkScroll
-              to="pricing"
-              offset={-100}
-              spy
-              smooth
-              className="hover:text-purple-700 transition-colors cursor-pointer"
-            >
-              Pricing
-            </LinkScroll>
-            <a href="about.html" className="hover:text-purple-700 transition-colors">About</a>
-            <a href="#support" className="hover:text-purple-700 transition-colors">Support</a>
+          <nav className="hidden md:flex items-center gap-7 text-base font-semibold text-gray-800">
+            <Link to="/features" className="hover:text-purple-700 transition-colors">Features</Link>
+            <Link to="/pricing" className="hover:text-purple-700 transition-colors">Pricing</Link>
+            <Link to="/about" className="hover:text-purple-700 transition-colors">About</Link>
+            <Link to="/support" className="hover:text-purple-700 transition-colors">Support</Link>
           </nav>
+          {/* Mobile menu button */}
+          <button
+            className="md:hidden flex items-center px-2 py-1 border rounded text-gray-700 border-gray-300 hover:bg-gray-100 focus:outline-none"
+            onClick={() => setShowMobileMenu((v) => !v)}
+            aria-label="Open navigation menu"
+          >
+            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
+          </button>
 
           {/* Right actions */}
-          <div className="flex items-center gap-4 min-w-[260px] justify-end">
-            <a href="#signin" className="text-gray-700 font-medium hover:text-purple-700 transition-colors">Sign in</a>
+          <div className="hidden md:flex items-center gap-4 min-w-[200px] justify-end">
+            <a href="signin.html" className="text-gray-700 font-medium hover:text-purple-700 transition-colors">Sign in</a>
             <a href="#get-started" className="px-4 py-2 bg-purple-800 text-white rounded-md font-bold hover:bg-purple-900 transition-colors">Get Started</a>
           </div>
         </div>
+        {/* Mobile menu */}
+        {showMobileMenu && (
+          <div className="md:hidden mt-2 bg-white rounded-lg shadow-lg p-4 flex flex-col gap-4">
+            <Link to="/features" className="hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Features</Link>
+            <Link to="/pricing" className="hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Pricing</Link>
+            <Link to="/about" className="hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>About</Link>
+            <Link to="/support" className="hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Support</Link>
+            <a href="signin.html" className="text-gray-700 font-medium hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Sign in</a>
+            <a href="#get-started" className="px-4 py-2 bg-purple-800 text-white rounded-md font-bold hover:bg-purple-900 transition-colors text-center" onClick={() => setShowMobileMenu(false)}>Get Started</a>
+          </div>
+        )}
       </div>
     </header>
   );
