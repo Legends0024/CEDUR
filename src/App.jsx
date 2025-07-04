@@ -5,6 +5,7 @@ import PricingPage from "./components/PricingPage.jsx";
 import FeaturesPage from "./components/FeaturesPage.jsx";
 import AboutFullPage from "./components/AboutFullPage.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SignInPage from "./components/SignInPage.jsx";
 import Faq from "./sections/Faq.jsx";
 import Testimonials from "./sections/Testimonials.jsx";
 import Footer from "./sections/Footer.jsx";
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/about" element={<AboutFullPage />} />
           <Route path="/support" element={<SupportPage />} />
+          <Route path="/signin" element={<SignInPage />} />
         </Routes>
       </main>
     </Router>
