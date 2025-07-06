@@ -62,10 +62,10 @@ const Header = () => {
         {/* Mobile menu */}
         {showMobileMenu && (
           <div className="md:hidden mt-2 bg-white rounded-lg shadow-lg p-4 flex flex-col gap-4">
-            <Link to="/features" className="hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Features</Link>
-            <Link to="/pricing" className="hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Pricing</Link>
-            <Link to="/about" className="hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>About</Link>
-            <Link to="/support" className="hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Support</Link>
+            <Link to="/features" className="text-gray-700 font-medium hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Features</Link>
+            <Link to="/pricing" className="text-gray-700 font-medium hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Pricing</Link>
+            <Link to="/about" className="text-gray-700 font-medium hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>About</Link>
+            <Link to="/support" className="text-gray-700 font-medium hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Support</Link>
             <Link to="/signin" className="text-gray-700 font-medium hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Sign in</Link>
             <Link to="/signup" className="px-4 py-2 bg-purple-800 text-white rounded-md font-bold hover:bg-purple-900 transition-colors text-center" onClick={() => setShowMobileMenu(false)}>Get Started</Link>
           </div>

@@ -20,8 +20,8 @@ const Pricing = () => {
             <div className="relative z-4 mx-auto flex w-[375px] rounded-3xl border-[3px] border-[#b39ddb]/25 bg-[#e6dbf7] p-2 backdrop-blur-[6px] max-md:w-[310px]">
               <button
                 className={clsx(
-                  "pricing-head_btn font-bold",
-                  monthly ? "text-black" : "text-black/60"
+                  "pricing-head_btn font-bold text-black",
+                  monthly ? "" : "opacity-60"
                 )}
                 onClick={() => setMonthly(true)}
               >
@@ -29,8 +29,8 @@ const Pricing = () => {
               </button>
               <button
                 className={clsx(
-                  "pricing-head_btn font-bold",
-                  !monthly ? "text-black" : "text-black/60"
+                  "pricing-head_btn font-bold text-black",
+                  !monthly ? "" : "opacity-60"
                 )}
                 onClick={() => setMonthly(false)}
               >

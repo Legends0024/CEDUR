@@ -2,7 +2,7 @@
 
 const AboutPage = () => {
   return (
-    <div className="w-full min-h-screen bg-[#ede7f6]">
+    <div className="w-full min-h-screen bg-[#ede7f6] pt-28 md:pt-36">
       {/* Top Gradient Section */}
       <section className="w-full py-20 md:py-28 bg-gradient-to-br from-[#4e5d94] via-[#4e5d94]/80 to-[#6c8ae4] text-white text-center">
         <h1 className="text-5xl md:text-6xl font-extrabold mb-4">About Cedur</h1>
