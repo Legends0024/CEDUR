@@ -20,7 +20,27 @@ const Header = () => {
     };
   }, []);
 
-  // Removed unused NavLink component
+
+  // Auth state
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const updateUser = () => {
+      const stored = localStorage.getItem("cedur_user");
+      setUser(stored ? JSON.parse(stored) : null);
+    };
+    updateUser();
+    window.addEventListener("cedur_auth_change", updateUser);
+    return () => window.removeEventListener("cedur_auth_change", updateUser);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("cedur_token");
+    localStorage.removeItem("cedur_user");
+    window.dispatchEvent(new Event("cedur_auth_change"));
+    setUser(null);
+    window.location.href = "/";
+  };
 
 
   return (
@@ -55,8 +75,17 @@ const Header = () => {
 
           {/* Right actions */}
           <div className="hidden md:flex items-center gap-4 min-w-[200px] justify-end">
-            <Link to="/signin" className="text-gray-700 font-medium hover:text-purple-700 transition-colors">Sign in</Link>
-            <Link to="/signup" className="px-4 py-2 bg-purple-800 text-white rounded-md font-bold hover:bg-purple-900 transition-colors">Get Started</Link>
+            {user ? (
+              <>
+                <span className="text-gray-700 font-medium">Hi, {user.firstName}</span>
+                <button onClick={handleLogout} className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md font-bold hover:bg-gray-300 transition-colors">Logout</button>
+              </>
+            ) : (
+              <>
+                <Link to="/signin" className="text-gray-700 font-medium hover:text-purple-700 transition-colors">Sign in</Link>
+                <Link to="/signup" className="px-4 py-2 bg-purple-800 text-white rounded-md font-bold hover:bg-purple-900 transition-colors">Get Started</Link>
+              </>
+            )}
           </div>
         </div>
         {/* Mobile menu */}
@@ -66,8 +95,14 @@ const Header = () => {
             <Link to="/pricing" className="text-gray-700 font-medium hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Pricing</Link>
             <Link to="/about" className="text-gray-700 font-medium hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>About</Link>
             <Link to="/support" className="text-gray-700 font-medium hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Support</Link>
-            <Link to="/signin" className="text-gray-700 font-medium hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Sign in</Link>
-            <Link to="/signup" className="px-4 py-2 bg-purple-800 text-white rounded-md font-bold hover:bg-purple-900 transition-colors text-center" onClick={() => setShowMobileMenu(false)}>Get Started</Link>
+            {user ? (
+              <button onClick={() => { setShowMobileMenu(false); handleLogout(); }} className="text-gray-700 font-medium hover:text-purple-700 transition-colors">Logout</button>
+            ) : (
+              <>
+                <Link to="/signin" className="text-gray-700 font-medium hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Sign in</Link>
+                <Link to="/signup" className="px-4 py-2 bg-purple-800 text-white rounded-md font-bold hover:bg-purple-900 transition-colors text-center" onClick={() => setShowMobileMenu(false)}>Get Started</Link>
+              </>
+            )}
           </div>
         )}
       </div>
