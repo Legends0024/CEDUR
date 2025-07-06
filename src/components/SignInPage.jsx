@@ -1,17 +1,17 @@
-
+import { Link } from "react-router-dom";
 
 const SignInPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#ede7f6] via-[#e6dbf7] to-[#b39ddb] flex items-center justify-center py-12 px-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-10 mx-auto">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 sm:p-10 mx-auto mt-20 sm:mt-28">
         <div className="flex flex-col items-center mb-8">
           <a href="/" className="mb-4 block">
-            <img src="/images/cedur.png" alt="Cedur Logo" className="h-12 mx-auto" />
+            <img src="/images/cedur.png" alt="Cedur Logo" className="h-14 w-auto mx-auto" />
           </a>
           <h2 className="text-3xl font-extrabold text-black mb-2">Welcome back</h2>
-          <p className="text-gray-700 mb-6">Sign in to your account</p>
+          <p className="text-gray-700 mb-6 text-center">Sign in to your account</p>
         </div>
-        <form>
+        <form autoComplete="off">
           <label className="block text-sm font-medium mb-1 text-black" htmlFor="email">Email address</label>
           <input
             type="email"
@@ -37,7 +37,7 @@ const SignInPage = () => {
             Sign in
           </button>
         </form>
-        <p className="text-center text-gray-700 mt-4">Don&apos;t have an account? <a href="#" className="text-[#6c47c7] font-semibold hover:underline">Sign up now</a></p>
+        <p className="text-center text-gray-700 mt-4">Don&apos;t have an account? <Link to="/signup" className="text-[#6c47c7] font-semibold hover:underline">Sign up now</Link></p>
       </div>
     </div>
   );

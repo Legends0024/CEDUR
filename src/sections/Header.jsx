@@ -55,8 +55,8 @@ const Header = () => {
 
           {/* Right actions */}
           <div className="hidden md:flex items-center gap-4 min-w-[200px] justify-end">
-            <a href="signin.html" className="text-gray-700 font-medium hover:text-purple-700 transition-colors">Sign in</a>
-            <a href="#get-started" className="px-4 py-2 bg-purple-800 text-white rounded-md font-bold hover:bg-purple-900 transition-colors">Get Started</a>
+            <Link to="/signin" className="text-gray-700 font-medium hover:text-purple-700 transition-colors">Sign in</Link>
+            <Link to="/signup" className="px-4 py-2 bg-purple-800 text-white rounded-md font-bold hover:bg-purple-900 transition-colors">Get Started</Link>
           </div>
         </div>
         {/* Mobile menu */}
@@ -66,8 +66,8 @@ const Header = () => {
             <Link to="/pricing" className="hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Pricing</Link>
             <Link to="/about" className="hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>About</Link>
             <Link to="/support" className="hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Support</Link>
-            <a href="signin.html" className="text-gray-700 font-medium hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Sign in</a>
-            <a href="#get-started" className="px-4 py-2 bg-purple-800 text-white rounded-md font-bold hover:bg-purple-900 transition-colors text-center" onClick={() => setShowMobileMenu(false)}>Get Started</a>
+            <Link to="/signin" className="text-gray-700 font-medium hover:text-purple-700 transition-colors" onClick={() => setShowMobileMenu(false)}>Sign in</Link>
+            <Link to="/signup" className="px-4 py-2 bg-purple-800 text-white rounded-md font-bold hover:bg-purple-900 transition-colors text-center" onClick={() => setShowMobileMenu(false)}>Get Started</Link>
           </div>
         )}
       </div>
