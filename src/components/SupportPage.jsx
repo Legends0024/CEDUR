@@ -1,7 +1,44 @@
 import Footer from "../sections/Footer.jsx";
 import Header from "../sections/Header.jsx";
+import { useState } from "react";
 
 const SupportPage = () => {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [status, setStatus] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setStatus("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      let data = {};
+      const contentType = res.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        data = await res.json();
+      }
+      if (!res.ok) {
+        // If backend returns no JSON, show generic error
+        throw new Error(data && data.message ? data.message : `Error: ${res.status} ${res.statusText}`);
+      }
+      setStatus(data && data.message ? data.message : "Message sent successfully!");
+      setForm({ name: "", email: "", message: "" });
+    } catch (err) {
+      setStatus(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <>
       <Header />
@@ -13,43 +50,25 @@ const SupportPage = () => {
           </div>
         </section>
         <section className="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-10">
-          {/* Demo Form */}
+          {/* Contact Form */}
           <div className="bg-white rounded-2xl p-8 shadow-lg border border-[#e6dbf7]">
-            <h2 className="text-2xl font-bold mb-2 text-black">Schedule Your Free Demo</h2>
-            <p className="mb-6 text-gray-700">Fill out the form below and we&apos;ll schedule a personalized demo within 24 hours.</p>
-            <form className="space-y-4">
-              <div className="flex gap-4">
-                <div className="flex-1">
-                  <label className="block text-sm font-medium mb-1 text-gray-700">Full Name *</label>
-                  <input className="w-full rounded-md p-2 bg-[#f5f3ff] text-black border border-[#e6dbf7] focus:outline-none focus:ring-2 focus:ring-[#a78bfa]" placeholder="Your Name" required />
-                </div>
-                <div className="flex-1">
-                  <label className="block text-sm font-medium mb-1 text-gray-700">Work Email *</label>
-                  <input className="w-full rounded-md p-2 bg-[#f5f3ff] text-black border border-[#e6dbf7] focus:outline-none focus:ring-2 focus:ring-[#a78bfa]" placeholder="you@example.com" type="email" required />
-                </div>
+            <h2 className="text-2xl font-bold mb-2 text-black">Contact Us</h2>
+            <p className="mb-6 text-gray-700">Fill out the form below and we&apos;ll get back to you as soon as possible.</p>
+            <form className="space-y-4" onSubmit={handleSubmit}>
+              <div>
+                <label className="block text-sm font-medium mb-1 text-gray-700">Full Name *</label>
+                <input name="name" value={form.name} onChange={handleChange} className="w-full rounded-md p-2 bg-[#f5f3ff] text-black border border-[#e6dbf7] focus:outline-none focus:ring-2 focus:ring-[#a78bfa]" placeholder="Your Name" required />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1 text-gray-700">Company Name *</label>
-                <input className="w-full rounded-md p-2 bg-[#f5f3ff] text-black border border-[#e6dbf7] focus:outline-none focus:ring-2 focus:ring-[#a78bfa]" placeholder="Company Name" required />
+                <label className="block text-sm font-medium mb-1 text-gray-700">Email *</label>
+                <input name="email" type="email" value={form.email} onChange={handleChange} className="w-full rounded-md p-2 bg-[#f5f3ff] text-black border border-[#e6dbf7] focus:outline-none focus:ring-2 focus:ring-[#a78bfa]" placeholder="you@example.com" required />
               </div>
-              <div className="flex gap-4">
-                <div className="flex-1">
-                  <label className="block text-sm font-medium mb-1 text-gray-700">Number of Employees</label>
-                  <select className="w-full rounded-md p-2 bg-[#f5f3ff] text-black border border-[#e6dbf7]">
-                    <option>Select company size</option>
-                    <option>1-10</option>
-                    <option>11-50</option>
-                    <option>51-200</option>
-                    <option>201-500</option>
-                    <option>500+</option>
-                  </select>
-                </div>
-                <div className="flex-1">
-                  <label className="block text-sm font-medium mb-1 text-gray-700">Primary Interest</label>
-                  <input className="w-full rounded-md p-2 bg-[#f5f3ff] text-black border border-[#e6dbf7]" placeholder="What interests you most?" />
-                </div>
+              <div>
+                <label className="block text-sm font-medium mb-1 text-gray-700">Message *</label>
+                <textarea name="message" value={form.message} onChange={handleChange} className="w-full rounded-md p-2 bg-[#f5f3ff] text-black border border-[#e6dbf7] focus:outline-none focus:ring-2 focus:ring-[#a78bfa]" placeholder="How can we help you?" rows={4} required />
               </div>
-              <button type="submit" className="w-full bg-[#a78bfa] text-white py-2 rounded-md font-bold hover:bg-[#7c5fd4] transition-colors">Request Demo</button>
+              <button type="submit" className="w-full bg-[#a78bfa] text-white py-2 rounded-md font-bold hover:bg-[#7c5fd4] transition-colors" disabled={loading}>{loading ? "Sending..." : "Send Message"}</button>
+              {status && <div className="mt-2 text-center text-sm text-black">{status}</div>}
             </form>
           </div>
           {/* Contact Info */}

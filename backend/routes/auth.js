@@ -7,22 +7,34 @@ const router = express.Router();
 
 // Register
 
+
+
 router.post('/signup', async (req, res) => {
-  console.log('POST /api/auth/signup', req.body);
   try {
     const { firstName, lastName, email, password, companyName, numEmployees, companyPhone } = req.body;
     if (!firstName || !lastName || !email || !password) {
-      return res.status(400).json({ message: 'All fields are required.' });
+      res.status(400).json({ message: 'All fields are required.' });
+      return;
     }
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ message: 'Email already registered.' });
+      res.status(400).json({ message: 'Email already registered.' });
+      return;
     }
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ firstName, lastName, email, password: hashedPassword, companyName, numEmployees, companyPhone });
     await user.save();
     res.status(201).json({ message: 'User registered successfully.' });
   } catch (err) {
+    console.error('Signup error:', err);
+    if (err.name === 'ValidationError') {
+      res.status(400).json({ message: err.message });
+      return;
+    }
+    if (err.code === 11000) {
+      res.status(400).json({ message: 'Email already registered.' });
+      return;
+    }
     res.status(500).json({ message: 'Server error.' });
   }
 });

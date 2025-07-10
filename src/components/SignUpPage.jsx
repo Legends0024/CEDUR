@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
+import { API_ENDPOINTS } from "../config";
 
 const SignUpPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,6 +18,7 @@ const SignUpPage = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.id]: e.target.value });
@@ -33,7 +34,7 @@ const SignUpPage = () => {
     }
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/auth/signup", {
+      const res = await fetch(API_ENDPOINTS.signup, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -46,8 +47,14 @@ const SignUpPage = () => {
           password: form.password,
         }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Sign up failed");
+      let data = {};
+      const contentType = res.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        data = await res.json();
+      }
+      if (!res.ok) {
+        throw new Error(data && data.message ? data.message : `Error: ${res.status} ${res.statusText}`);
+      }
       setSuccess("Account created! You can now sign in.");
       setForm({
         firstName: "",
@@ -59,6 +66,9 @@ const SignUpPage = () => {
         password: "",
         confirmPassword: "",
       });
+      setTimeout(() => {
+        navigate("/signin");
+      }, 2000);
     } catch (err) {
       setError(err.message);
     } finally {
