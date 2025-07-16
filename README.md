@@ -31,17 +31,32 @@ Built with ❤️ using React and Tailwind CSS, CEDUR aims to empower businesses
 
 ```bash
 CEDUR/
+├── backend/
+│   ├── models/
+│   └── routes/
+│   └── node_modules/
+│   └── server.js
+│   └── .env
+│   └── package.json
+│   └── package-lock.json
 ├── public/
 ├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── sections/
-│   ├── constants/
-│   ├── App.jsx
-│   └── main.jsx
+├── .env
+├── .env.production
+├── .gitignore
+├── about.html
+├── eslint.config.js
+├── index.html
 ├── package.json
+├── package-lock.json
+├── postcss.config.js
+├── README.md
+├── server.js
+├── signin.html
 ├── tailwind.config.js
-└── index.html
+├── vite.config.js
+└── node_modules/
+
 
 
 🚧 Setup Instructions
